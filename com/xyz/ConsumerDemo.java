@@ -11,18 +11,17 @@ Consumer Interface - introduced in Java 8. Part of java.util.function package
 (Reside under rt.jar).
  */
 public class ConsumerDemo {
+    static Consumer<Student> studentConsumer = student -> System.out.println(student);
+    static Consumer<Student> nameConsumer = student -> System.out.print(student.getName());
+    static Consumer<Student> activitiesConsumer = student -> System.out.println(student.getActivities());
+
+    static List<Student> studentList = StudentDataBase.getAllStudents();
 
     public static void printStudent(){
-        Consumer<Student> studentConsumer = student -> System.out.println(student);
-        List<Student> studentList = StudentDataBase.getAllStudents();
         studentList.forEach(studentConsumer);
     }
 
     public static void printNameAndActivities(){
-        Consumer<Student> nameConsumer = student -> System.out.print(student.getName());
-        Consumer<Student> activitiesConsumer = student -> System.out.println(student.getActivities());
-
-        List<Student> studentList = StudentDataBase.getAllStudents();
         studentList.forEach(nameConsumer.andThen(activitiesConsumer));//Consumer-Chaining
     }
 
