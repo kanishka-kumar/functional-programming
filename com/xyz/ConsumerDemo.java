@@ -25,6 +25,15 @@ public class ConsumerDemo {
         studentList.forEach(nameConsumer.andThen(activitiesConsumer));//Consumer-Chaining
     }
 
+    //Creating inline lambda consumer interface implementation
+    public static void printBasedOnGradeAndGpa(){
+        studentList.forEach(student -> {
+           if(student.getGradeLevel()>=4 && student.getGpa()>3.8){
+               nameConsumer.andThen(activitiesConsumer).accept(student);
+           }
+        });
+    }
+
     public static void main(String[] args) {
         Consumer<String> consumer = (s) -> System.out.println(s.toUpperCase());
         consumer.accept("sample-text");
@@ -32,5 +41,7 @@ public class ConsumerDemo {
         printStudent();
         System.out.println("------------------\n------------------");
         printNameAndActivities();
+        System.out.println("------------------\n------------------");
+        printBasedOnGradeAndGpa();
     }
 }
